@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Items - Flask Learning{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1>Items</h1>
+    
+    {% if items %}
+        <div style="margin-top: 1.5rem;">
+            {% for item in items %}
+                <div style="border: 1px solid #ddd; padding: 1rem; margin-bottom: 1rem; border-radius: 4px;">
+                    <h3>{{ item.name }}</h3>
+                    <p>{{ item.description or 'No description provided' }}</p>
+                    <small style="color: #7f8c8d;">
+                        Created: {{ item.created_at.strftime('%Y-%m-%d %H:%M') if item.created_at else 'Unknown' }}
+                    </small>
+                    <div style="margin-top: 0.5rem;">
+                        <a href="{{ url_for('main.handle_item', item_id=item.id) }}" class="btn">View Details</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Pagination -->
+        {% if pagination.pages > 1 %}
+            <div style="display: flex; gap: 0.5rem; margin-top: 1.5rem; justify-content: center;">
+                {% if pagination.has_prev %}
+                    <a href="{{ url_for('main.list_items', page=pagination.prev_num) }}" class="btn">← Previous</a>
+                {% endif %}
+                
+                <span style="padding: 0.5rem 1rem;">
+                    Page {{ pagination.page }} of {{ pagination.pages }}
+                </span>
+                
+                {% if pagination.has_next %}
+                    <a href="{{ url_for('main.list_items', page=pagination.next_num) }}" class="btn">Next →</a>
+                {% endif %}
+            </div>
+        {% endif %}
+    {% else %}
+        <p style="margin-top: 1rem;">No items found. <a href="{{ url_for('main.add_item') }}">Add your first item</a></p>
+    {% endif %}
+</div>
+{% endblock %}

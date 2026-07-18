@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Flask Learning{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1>Welcome to Flask Learning App! 🚀</h1>
+    <p>This is a simple Flask application designed to help you learn Python programming.</p>
+    
+    <div style="margin: 2rem 0;">
+        <h3>What you can learn:</h3>
+        <ul style="margin-left: 2rem; line-height: 2;">
+            <li>✅ Flask routing and views</li>
+            <li>✅ Templates with Jinja2</li>
+            <li>✅ Forms and validation</li>
+            <li>✅ Database operations with SQLAlchemy</li>
+            <li>✅ RESTful API design</li>
+            <li>✅ Error handling</li>
+            <li>✅ Application factory pattern (scalable architecture)</li>
+        </ul>
+    </div>
+    
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="{{ url_for('main.list_items') }}" class="btn">View Items ({{ items_count }})</a>
+        <a href="{{ url_for('main.add_item') }}" class="btn">Add New Item</a>
+        <a href="{{ url_for('main.api_items') }}" class="btn" target="_blank">View API</a>
+    </div>
+</div>
+{% endblock %}

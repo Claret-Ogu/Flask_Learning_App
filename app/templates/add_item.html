@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Add Item - Flask Learning{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h1>Add New Item</h1>
+    
+    <form method="POST" style="margin-top: 1.5rem;">
+        {{ form.hidden_tag() }}
+        
+        <div style="margin-bottom: 1rem;">
+            {{ form.name.label }}
+            {{ form.name(class="form-control", style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;") }}
+            {% if form.name.errors %}
+                <div style="color: #e74c3c; font-size: 0.9rem; margin-top: 0.25rem;">
+                    {% for error in form.name.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        
+        <div style="margin-bottom: 1rem;">
+            {{ form.description.label }}
+            {{ form.description(class="form-control", rows=4, style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;") }}
+            {% if form.description.errors %}
+                <div style="color: #e74c3c; font-size: 0.9rem; margin-top: 0.25rem;">
+                    {% for error in form.description.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        
+        <div style="display: flex; gap: 1rem;">
+            {{ form.submit(class="btn") }}
+            <a href="{{ url_for('main.list_items') }}" class="btn" style="background: #95a5a6;">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
